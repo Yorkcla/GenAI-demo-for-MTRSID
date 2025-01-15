@@ -16,7 +16,7 @@ const openai = new OpenAIApi(configuration);
 // CORS middleware
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://127.0.0.1:5501'  // Allow requests from this origin
+    origin: 'http://127.0.0.1:5500'  // Allow requests from this origin
 }));
 
 // Middleware to parse JSON bodies

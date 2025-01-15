@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="section" id="one">
+        arigatou
+    </div>
+    <div class="section" id="two">
+        <form id="dropdown-form">
+            <select class="variable-dropdown" id="variable-dropdown">
+                <option value="1">1 task</option>
+                <option value="2">2 tasks</option>
+                <option value="3">3 tasks</option>
+                <option value="4">4 tasks</option>
+                <option value="5">5 tasks</option>
+                <option value="6">6 tasks</option>
+            </select>
+            <select class="variable-dropdown" id="variable-dropdown2">
+                <option value="any">Any</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+            </select>
+            <select class="variable-dropdown" id="variable-dropdown3">
+                <option value="major or minor">Any</option>
+                <option value="major">major</option>
+                <option value="minor">minor</option>
+            </select>
+            <div id="dynamic-dropdown-container">
+            </div>
+            <button type="submit">Harmonic Function Assignment</button>
+            <input type="text" id="chord-input">
+            <button id="get-notes-button">Notes</button>
+            <input type="text" id="notes-output" readonly>
+            <button id="ask-button" type="submit">Note Arrangement</button>
+        </form>
+        <div id="text-result-1"></div>
+    </div>
+    </div>
+    <div class="section" id="three">
+        nihaoma
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tonal/browser/tonal.min.js"></script>
+</body>
+</html>

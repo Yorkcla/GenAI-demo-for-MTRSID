@@ -1,0 +1,90 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body, html {
+    height: 100%;  /* Ensure body takes up full screen height */
+    width: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;  /* Flexbox to align the sections vertically */
+    flex-direction: row;  /* Align sections in a column (vertically) */
+}
+
+/* Section styling */
+
+.section {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    border-right: 3px solid #000000;
+    display: block;
+    align-items: center;
+    padding: 20px;
+    font-size: 2rem;
+    text-align: center;
+    justify-content: space-evenly;
+}
+
+/* Specific styles for each section */
+#one {
+
+}
+
+#two {
+
+}
+
+#three {
+
+}
+/* General styling for the form */
+#dropdown-form {
+    width: 400px; /* Adjust width as needed */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 10px; /* Add padding around the form */
+    background-color: #ffffff; /* Background color for the form */
+  }
+  
+  /* Styling for the main dropdown */
+  .variable-dropdown {
+    width: 100%; /* Full width of the container */
+    padding: 2px; /* Match padding with the button */
+    font-size: 12px; /* Match font size with the button */
+    border: 1px solid #ffffff; /* Border for dropdown */
+    border-radius: 5px; /* Match border radius with the button */
+  }
+  
+  /* Styling for dynamically created dropdowns container */
+  #dynamic-dropdown-container {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack dropdowns vertically */
+    gap: 10px; /* Space between each dropdown */
+    margin-top: 20px;
+  }
+  
+  /* Styling for each dynamic dropdown */
+  #dynamic-dropdown-container select {
+    width: 100%; /* Full width of the container */
+    padding: 2px; /* Match padding with the button */
+    font-size: 12px; /* Match font size with the button */
+    border: 1px solid #ffffff; /* Border for dropdowns */
+    border-radius: 5px; /* Match border radius with the button */
+  }
+  
+  /* Styling for the submit button */
+  #dropdown-form button {
+    padding: 5px 5px; /* Match existing button style */
+    font-size: 12px; /* Match existing button font size */
+    background-color: #000000; /* Match existing button background color */
+    color: white; /* Match existing button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Match existing button border radius */
+    cursor: pointer; /* Change cursor to pointer */
+    z-index: 10; /* Ensure button is above other content */
+    display: inline-block; /* Inline-block display */
+    margin-top: 10px;
+  }
