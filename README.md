@@ -1,1 +1,1 @@
-# GenAI-demo-for-musical-tension-and-release-framework
+# GenAI-demo-for-MTRSID
