@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', () => {
+
 document.getElementById('dropdown-form').addEventListener('submit', async (event) => {
     event.preventDefault();
     
@@ -85,33 +87,31 @@ document.getElementById('ask-button').addEventListener('click', async (event) =>
     }
 });
     
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('variable-dropdown').addEventListener('change', (event) => {
-        const dropdownValue = event.target.value;  // Get the selected value from the dropdown
-        const container = document.getElementById('dynamic-dropdown-container');  // Reference the container for the new dropdowns
-    
-        // Clear any existing dropdowns in the container
-        container.innerHTML = '';
-    
-        // Create the number of dropdowns based on the dropdownValue
-        for (let i = 0; i < dropdownValue; i++) {
-            const newDropdown = document.createElement('select');
-            newDropdown.id = `dynamic-dropdown-${i+1}`;  // Unique ID for each dropdown
-    
-            // Populate each dropdown with options
-            newDropdown.innerHTML = `
-                <option value="tonic">Start</option>
-                <option value="subdominant">Rising</option>
-                <option value="dominant">Peak</option>
-                <option value="submediant">Semi-End</option>
-                <option value="tonic">End</option>
-            `;
-    
-            // Append the new dropdown to the container
-            container.appendChild(newDropdown);
-        }
-    });    
-});
+document.getElementById('variable-dropdown').addEventListener('change', (event) => {
+    const dropdownValue = event.target.value;  // Get the selected value from the dropdown
+    const container = document.getElementById('dynamic-dropdown-container');  // Reference the container for the new dropdowns
+
+    // Clear any existing dropdowns in the container
+    container.innerHTML = '';
+
+    // Create the number of dropdowns based on the dropdownValue
+    for (let i = 0; i < dropdownValue; i++) {
+        const newDropdown = document.createElement('select');
+        newDropdown.id = `dynamic-dropdown-${i+1}`;  // Unique ID for each dropdown
+
+        // Populate each dropdown with options
+        newDropdown.innerHTML = `
+            <option value="tonic">Start</option>
+            <option value="subdominant">Rising</option>
+            <option value="dominant">Peak</option>
+            <option value="submediant">Semi-End</option>
+            <option value="tonic">End</option>
+        `;
+
+        // Append the new dropdown to the container
+        container.appendChild(newDropdown);
+    }
+});    
 
 
 // Function to create and append a new message element
@@ -135,5 +135,5 @@ document.getElementById('get-notes-button').addEventListener('click', () => {
     // Display the notes in the output field
     document.getElementById('notes-output').value = chordNotes.join(' ');
 });
-        
-    
+
+});

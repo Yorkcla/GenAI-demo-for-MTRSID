@@ -2,21 +2,20 @@
 require('dotenv').config();
 
 const express = require('express');
-const { Configuration, OpenAIApi } = require('openai');
+const OpenAI = require('openai');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 // Set up OpenAI configuration
-const configuration = new Configuration({
+const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 // CORS middleware
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://127.0.0.1:5500'  // Allow requests from this origin
+    origin: 'http://127.0.0.1:5501'  // Allow requests from this origin
 }));
 
 // Middleware to parse JSON bodies
@@ -27,7 +26,7 @@ app.post('/generate-text', async (req, res) => {
     const { prompt } = req.body;
 
     try {
-        const response = await openai.createChatCompletion({
+        const response = await openai.chat.completions.create({
             model: 'gpt-4o-mini',
             messages: [{ role: 'user', content: prompt }],
             max_tokens: 500,
@@ -35,7 +34,11 @@ app.post('/generate-text', async (req, res) => {
 
         res.json(response.data);
     } catch (error) {
-        res.status(500).send(error.message);
+        if (error instanceof OpenAI.APIError) {
+            res.status(error.status).send(error.message);
+        } else {
+            res.status(500).send('An unexpected error occurred.');
+        }
     }
 });
 

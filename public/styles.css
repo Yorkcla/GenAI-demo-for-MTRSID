@@ -49,42 +49,61 @@ body, html {
     background-color: #ffffff; /* Background color for the form */
   }
   
-  /* Styling for the main dropdown */
-  .variable-dropdown {
-    width: 100%; /* Full width of the container */
-    padding: 2px; /* Match padding with the button */
-    font-size: 12px; /* Match font size with the button */
-    border: 1px solid #ffffff; /* Border for dropdown */
-    border-radius: 5px; /* Match border radius with the button */
-  }
-  
-  /* Styling for dynamically created dropdowns container */
-  #dynamic-dropdown-container {
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack dropdowns vertically */
-    gap: 10px; /* Space between each dropdown */
-    margin-top: 20px;
-  }
-  
-  /* Styling for each dynamic dropdown */
-  #dynamic-dropdown-container select {
-    width: 100%; /* Full width of the container */
-    padding: 2px; /* Match padding with the button */
-    font-size: 12px; /* Match font size with the button */
-    border: 1px solid #ffffff; /* Border for dropdowns */
-    border-radius: 5px; /* Match border radius with the button */
-  }
-  
-  /* Styling for the submit button */
-  #dropdown-form button {
-    padding: 5px 5px; /* Match existing button style */
-    font-size: 12px; /* Match existing button font size */
-    background-color: #000000; /* Match existing button background color */
-    color: white; /* Match existing button text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Match existing button border radius */
-    cursor: pointer; /* Change cursor to pointer */
-    z-index: 10; /* Ensure button is above other content */
-    display: inline-block; /* Inline-block display */
-    margin-top: 10px;
-  }
+/* Styling for the main dropdown */
+.variable-dropdown {
+  width: 100%; /* Full width of the container */
+  padding: 2px; /* Match padding with the button */
+  font-size: 12px; /* Match font size with the button */
+  border: 1px solid #ffffff; /* Border for dropdown */
+  border-radius: 5px; /* Match border radius with the button */
+}
+
+/* Styling for dynamically created dropdowns container */
+#dynamic-dropdown-container {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack dropdowns vertically */
+  gap: 10px; /* Space between each dropdown */
+  margin-top: 20px;
+}
+
+/* Styling for each dynamic dropdown */
+#dynamic-dropdown-container select {
+  width: 100%; /* Full width of the container */
+  padding: 2px; /* Match padding with the button */
+  font-size: 12px; /* Match font size with the button */
+  border: 1px solid #ffffff; /* Border for dropdowns */
+  border-radius: 5px; /* Match border radius with the button */
+}
+
+/* Styling for the submit button */
+#dropdown-form button {
+  padding: 5px 5px; /* Match existing button style */
+  font-size: 12px; /* Match existing button font size */
+  background-color: #000000; /* Match existing button background color */
+  color: white; /* Match existing button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Match existing button border radius */
+  cursor: pointer; /* Change cursor to pointer */
+  z-index: 10; /* Ensure button is above other content */
+  display: inline-block; /* Inline-block display */
+  margin-top: 10px;
+}
+
+/* chat */
+
+.message {
+  margin-bottom: 5px;
+  padding: 5px;
+  max-width: 100%;
+}
+
+.user-message {
+  align-self: flex-end;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.chatbot-message {
+  align-self: flex-start;
+  font-size: 20px;
+}
