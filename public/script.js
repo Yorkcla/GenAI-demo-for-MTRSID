@@ -8,7 +8,7 @@ document.getElementById('task-button').addEventListener('click', async (event) =
     const inputValue3 = document.getElementById('number-input').value;
 
     // Construct the prompt using the input value
-    const prompt = `Provide a task specification about ${inputValue} consisting of ${inputValue2} actions, aligned with hierarchical task analysis and considering ${inputValue3} as the user. Please simply suggest the tasks.`;
+    const prompt = `Provide a task specification about ${inputValue} consisting of ${inputValue3} actions, aligned with hierarchical task analysis and considering ${inputValue2} as the user. Please simply suggest the tasks.`;
 
     try {
         const response = await fetch('http://localhost:3001/generate-text', {
@@ -27,14 +27,14 @@ document.getElementById('task-button').addEventListener('click', async (event) =
         console.log('Text generation response:', data);
 
         if (data.message) {
-            appendMessage('user', prompt);
-            appendMessage('chatbot', data.message);
+            appendMessage('user', prompt, 'text-result-1');
+            appendMessage('chatbot', data.message, 'text-result-1');
         } else {
             throw new Error('Unexpected response structure: missing "message"');
         }
     } catch (error) {
         console.error('Error:', error);
-        appendMessage('chatbot', 'Error: ' + error.message);
+        appendMessage('chatbot', 'Error: ' + error.message, 'text-result-1');
     }
 });
 ////// section one end
@@ -82,14 +82,14 @@ document.getElementById('task-button').addEventListener('click', async (event) =
             console.log('Dropdown-based text generation response:', data);
 
             if (data.message) {
-                appendMessage('user', prompt);
-                appendMessage('chatbot', data.message);
+                appendMessage('user', prompt, 'text-result-2');
+                appendMessage('chatbot', data.message, 'text-result-2');
             } else {
                 throw new Error('Unexpected response structure: missing "message"');
             }
         } catch (error) {
             console.error('Error:', error);
-            appendMessage('chatbot', 'Error: ' + error.message);
+            appendMessage('chatbot', 'Error: ' + error.message, 'text-result-2');
         }
     });
 
@@ -118,14 +118,14 @@ document.getElementById('task-button').addEventListener('click', async (event) =
             console.log('Text generation response:', data);
 
             if (data.message) {
-                appendMessage('user', prompt);
-                appendMessage('chatbot', data.message);
+                appendMessage('user', prompt, 'text-result-2');
+                appendMessage('chatbot', data.message, 'text-result-2');
             } else {
                 throw new Error('Unexpected response structure: missing "message"');
             }
         } catch (error) {
             console.error('Error:', error);
-            appendMessage('chatbot', 'Error: ' + error.message);
+            appendMessage('chatbot', 'Error: ' + error.message, 'text-result-2');
         }
     });
     
@@ -158,8 +158,8 @@ document.getElementById('task-button').addEventListener('click', async (event) =
     });
 
     // Function to create and append a new message element
-    function appendMessage(role, content) {
-        const chatHistory = document.getElementById('text-result-1');
+    function appendMessage(role, content, outputElementId) {
+        const chatHistory = document.getElementById(outputElementId);
         const messageDiv = document.createElement('div');
         messageDiv.className = 'message ' + (role === 'user' ? 'user-message' : 'chatbot-message');
         messageDiv.innerHTML = `<p>${content}</p>`;
