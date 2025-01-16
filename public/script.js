@@ -104,8 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <option value="tonic">Start</option>
                 <option value="subdominant">Rising</option>
                 <option value="dominant">Peak</option>
-                <option value="submediant">Semi-End</option>
                 <option value="tonic">End</option>
+                <option value="nonchord">Warning</option>
+                <option value="prolongation">Continue</option>
             `;
 
             // Append the new dropdown to the container
@@ -124,7 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle chord input
-    document.getElementById('get-notes-button').addEventListener('click', () => {
+    document.getElementById('get-notes-button').addEventListener('click', (event) => {
+        event.preventDefault();
         // Get the chord input value
         const chordInput = document.getElementById('chord-input').value.trim();
         
