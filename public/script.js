@@ -1,5 +1,48 @@
+////// section one start
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('dropdown-form').addEventListener('submit', async (event) => {
+document.getElementById('task-button').addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const inputValue = document.getElementById('task-input').value;
+    const inputValue2 = document.getElementById('user-input').value;
+    const inputValue3 = document.getElementById('number-input').value;
+
+    // Construct the prompt using the input value
+    const prompt = `Provide a task specification about ${inputValue} consisting of ${inputValue2} actions, aligned with hierarchical task analysis and considering ${inputValue3} as the user. Please simply suggest the tasks.`;
+
+    try {
+        const response = await fetch('http://localhost:3001/generate-text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Text generation response:', data);
+
+        if (data.message) {
+            appendMessage('user', prompt);
+            appendMessage('chatbot', data.message);
+        } else {
+            throw new Error('Unexpected response structure: missing "message"');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        appendMessage('chatbot', 'Error: ' + error.message);
+    }
+});
+////// section one end
+
+
+////// section two start
+
+    document.getElementById('dropdown-form2').addEventListener('submit', async (event) => {
         event.preventDefault();
         
         const dropdownValue = document.getElementById('variable-dropdown').value;
@@ -138,3 +181,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('notes-output').value = chordNotes.join(' ');
     });
 });
+
+////// section two end
