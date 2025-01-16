@@ -38,12 +38,15 @@ app.post('/generate-text', async (req, res) => {
             max_tokens: 500,
         });
 
-        if (response.data.choices) {
-            res.json({ message: response.data.choices[0].message.content });
+        console.log('Raw response:', response); // Log the raw response`
+
+        if (response.choices) {
+            res.json({ message: response.choices[0].message.content });
         } else {
             res.json({ message: 'No content received from OpenAI.' });
         }
     } catch (error) {
+        console.error('Error details:', error);
         if (error instanceof OpenAI.APIError) {
             res.status(error.status).send({ message: error.message });
         } else {
@@ -51,7 +54,7 @@ app.post('/generate-text', async (req, res) => {
         }
     }
 });
-
+ 
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
