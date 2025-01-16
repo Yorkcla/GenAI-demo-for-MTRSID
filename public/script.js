@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     document.getElementById('dropdown-form').addEventListener('submit', async (event) => {
         event.preventDefault();
-
+        
         const dropdownValue = document.getElementById('variable-dropdown').value;
         const dropdownValue2 = document.getElementById('variable-dropdown2').value;
         const dropdownValue3 = document.getElementById('variable-dropdown3').value;
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Collect selected values from dynamically generated dropdowns
         for (let i = 0; i < dropdownValue; i++) {
             const dropdown = document.getElementById(`dynamic-dropdown-${i+1}`);
-            if (dropdown) { // Check if dropdown exists
+            if (dropdown) {
                 const selectedValue = dropdown.options[dropdown.selectedIndex].value;
                 selectedValues.push(selectedValue);
             }
@@ -33,22 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
+                throw new Error('Network response was not ok');
             }
 
-            // Log the raw response to debug
-            const rawResponse = await response.text();
-            console.log('Raw response:', rawResponse);
-
-            const data = JSON.parse(rawResponse); // Explicitly parse the response
+            const data = await response.json();
             console.log('Dropdown-based text generation response:', data);
 
-            const resultSentence = data.choices[0].message.content;
-
-            // Append the user and chatbot messages to the chat history
-            appendMessage('user', prompt);
-            appendMessage('chatbot', resultSentence);
-
+            if (data.message) {
+                appendMessage('user', prompt);
+                appendMessage('chatbot', data.message);
+            } else {
+                throw new Error('Unexpected response structure: missing "message"');
+            }
         } catch (error) {
             console.error('Error:', error);
             appendMessage('chatbot', 'Error: ' + error.message);
@@ -73,28 +68,24 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
+                throw new Error('Network response was not ok');
             }
 
-            // Log the raw response to debug
-            const rawResponse = await response.text();
-            console.log('Raw response:', rawResponse);
-
-            const data = JSON.parse(rawResponse); // Explicitly parse the response
+            const data = await response.json();
             console.log('Text generation response:', data);
 
-            const resultSentence = data.choices[0].message.content;
-
-            // Append the user and chatbot messages to the chat history
-            appendMessage('user', prompt);
-            appendMessage('chatbot', resultSentence);
-
+            if (data.message) {
+                appendMessage('user', prompt);
+                appendMessage('chatbot', data.message);
+            } else {
+                throw new Error('Unexpected response structure: missing "message"');
+            }
         } catch (error) {
             console.error('Error:', error);
             appendMessage('chatbot', 'Error: ' + error.message);
         }
     });
-
+    
     // Handle dynamic dropdown creation
     document.getElementById('variable-dropdown').addEventListener('change', (event) => {
         const dropdownValue = event.target.value;  // Get the selected value from the dropdown
@@ -129,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageDiv.className = 'message ' + (role === 'user' ? 'user-message' : 'chatbot-message');
         messageDiv.innerHTML = `<p>${content}</p>`;
         chatHistory.appendChild(messageDiv);
-        chatHistory.scrollTop = chatHistory.scrollHeight; // Auto-scroll to the bottom
+        chatHistory.scrollTop = chatHistory.scrollHeight;
     }
 
     // Handle chord input
@@ -144,5 +135,4 @@ document.addEventListener('DOMContentLoaded', () => {
         // Display the notes in the output field
         document.getElementById('notes-output').value = chordNotes.join(' ');
     });
-
 });
