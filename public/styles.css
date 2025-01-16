@@ -29,19 +29,6 @@ body, html {
     justify-content: space-evenly;
 }
 
-/* Specific styles for each section */
-#one {
-
-}
-
-#two {
-
-}
-
-#three {
-
-}
-
 /* General styling for the form */
 .dropdown-form {
     width: 550px; /* Adjust width as needed */
