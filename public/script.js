@@ -1,4 +1,5 @@
 ////// section one start
+
 document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('task-button').addEventListener('click', async (event) => {
     event.preventDefault();
@@ -37,6 +38,7 @@ document.getElementById('task-button').addEventListener('click', async (event) =
         appendMessage('chatbot', 'Error: ' + error.message, 'text-result-1');
     }
 });
+
 ////// section one end
 
 
