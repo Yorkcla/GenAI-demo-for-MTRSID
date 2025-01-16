@@ -3,12 +3,11 @@ require('dotenv').config();
 
 const express = require('express');
 const OpenAI = require('openai');
-const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Validate OpenAI API key
+// Check for OpenAI API key
 if (!process.env.OPENAI_API_KEY) {
     console.error('Error: Missing OpenAI API key in .env file');
     process.exit(1);
@@ -20,21 +19,13 @@ const openai = new OpenAI({
 });
 
 // CORS middleware
+const cors = require('cors');
 app.use(cors({
-    origin: 'http://127.0.0.1:5501', // Replace with your frontend origin
-    credentials: true,
+    origin: 'http://127.0.0.1:5501' // Allow requests from this origin
 }));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-
-// Middleware to handle JSON parsing errors
-app.use((err, req, res, next) => {
-    if (err instanceof SyntaxError) {
-        return res.status(400).json({ error: 'Invalid JSON in request body' });
-    }
-    next();
-});
 
 // Route for text generation
 app.post('/generate-text', async (req, res) => {
@@ -42,20 +33,21 @@ app.post('/generate-text', async (req, res) => {
 
     try {
         const response = await openai.chat.completions.create({
-            model: 'gpt-4', // Replace with a valid model name
+            model: 'gpt-4o-mini',
             messages: [{ role: 'user', content: prompt }],
             max_tokens: 500,
         });
 
-        res.json({
-            message: response.choices[0].message.content, // Send only the message content
-        });
-    } catch (error) {
-        console.error('Error during OpenAI API call:', error); // Log errors
-        if (error instanceof OpenAI.APIError) {
-            res.status(error.status).json({ error: error.message });
+        if (response.data.choices) {
+            res.json({ message: response.data.choices[0].message.content });
         } else {
-            res.status(500).json({ error: 'An unexpected error occurred.' });
+            res.json({ message: 'No content received from OpenAI.' });
+        }
+    } catch (error) {
+        if (error instanceof OpenAI.APIError) {
+            res.status(error.status).send({ message: error.message });
+        } else {
+            res.status(500).send({ message: 'An unexpected error occurred.' });
         }
     }
 });
@@ -63,6 +55,4 @@ app.post('/generate-text', async (req, res) => {
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-}).on('error', (err) => {
-    console.error('Error starting server:', err.message);
 });
