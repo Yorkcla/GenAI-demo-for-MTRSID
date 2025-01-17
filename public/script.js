@@ -65,7 +65,7 @@ document.getElementById('task-button').addEventListener('click', async (event) =
         const selectedValuesString = selectedValues.join(', ');
 
         // Construct the prompt with the selected values
-        const prompt = `Provide 5 chord progression options in ${dropdownValue2} ${dropdownValue3} key for ${dropdownValue} measures, following the tonal functions in the order specified by: ${selectedValuesString}. Please simply suggest the options.`;
+        const prompt = `Provide 3 chord progression options in ${dropdownValue2} ${dropdownValue3} key for ${dropdownValue} measure(s), following the tonal functions in the order specified by: ${selectedValuesString}. Please simply suggest the options.`;
 
         try {
             const response = await fetch('http://localhost:3001/generate-text', {
@@ -101,7 +101,7 @@ document.getElementById('task-button').addEventListener('click', async (event) =
         const inputValue = document.getElementById('notes-output').value;
 
         // Construct the prompt using the input value
-        const prompt = `Provide 5 harmonic note arrangement options (including inversions) for 4 voices based on ${inputValue} with suitable octave numbers. Please simply suggest the options.`;
+        const prompt = `Provide 3 harmonic note arrangement options (including inversions) for 4 voices based on ${inputValue} with suitable octave numbers. Please simply suggest the options.`;
 
         try {
             const response = await fetch('http://localhost:3001/generate-text', {
@@ -207,7 +207,7 @@ document.getElementById('task-button').addEventListener('click', async (event) =
         const selectedValuesString = selectedValues.join(', ');
 
         // Construct the prompt with the selected values
-        const prompt = `Provide 5 key modulation options starting form ${dropdownValue5} ${dropdownValue6} key for ${dropdownValue4} sections, following the tonal functions in the order specified by: ${selectedValuesString}. Please simply suggest the options.`;
+        const prompt = `Provide 3 key modulation sets starting form ${dropdownValue5} ${dropdownValue6} for ${dropdownValue4} parts, following the tonal functions in the order specified by: ${selectedValuesString} key(s). Please simply suggest the options.`;
 
         try {
             const response = await fetch('http://localhost:3001/generate-text', {
@@ -264,4 +264,43 @@ document.getElementById('task-button').addEventListener('click', async (event) =
             container.appendChild(newDropdown);
         }
     });
+
+    document.getElementById('altered-button').addEventListener('click', async (event) => {
+    event.preventDefault();
+
+    const inputValue = document.getElementById('altered-input').value;
+    const dropdownValue5 = document.getElementById('variable-dropdown5').value;
+    const dropdownValue6 = document.getElementById('variable-dropdown6').value;
+    const dropdownValue7 = document.getElementById('variable-dropdown7').value;
+
+    // Construct the prompt using the input value
+    const prompt = `Provide 3 altered chord options for ${inputValue} based on ${dropdownValue7} style in ${dropdownValue5} ${dropdownValue6} key. Please simply suggest the tasks.`;
+
+    try {
+        const response = await fetch('http://localhost:3001/generate-text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ prompt })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        console.log('Text generation response:', data);
+
+        if (data.message) {
+            appendMessage('user', prompt, 'text-result-3');
+            appendMessage('chatbot', data.message, 'text-result-3');
+        } else {
+            throw new Error('Unexpected response structure: missing "message"');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        appendMessage('chatbot', 'Error: ' + error.message, 'text-result-3');
+    }
+});
 });

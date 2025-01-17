@@ -26,7 +26,7 @@
                 <option value="6">6 tasks</option>
             </select>
             <select class="variable-dropdown" id="variable-dropdown2">
-                <option value="any">Any</option>
+                <option value="any">any</option>
                 <option value="C">C</option>
                 <option value="C#">C#</option>
                 <option value="D">D</option>
@@ -44,14 +44,14 @@
                 <option value="Bb">Bb</option>
             </select>
             <select class="variable-dropdown" id="variable-dropdown3">
-                <option value="major or minor">Any</option>
+                <option value="major or minor">any</option>
                 <option value="major">major</option>
                 <option value="minor">minor</option>
             </select>
             <div class="dynamic-dropdown-container" id="dynamic-dropdown-container">
             </div>
             <button type="submit">Chord Progression</button>
-            <input type="text" id="chord-input" placeholder="maj, min, aug, dim, 7th, 9th">
+            <input type="text" id="chord-input" placeholder="Maj, Min, Aug, Dim, 7th, 9th">
             <button id="get-notes-button">Note</button>
             <input type="text" id="notes-output" readonly>
             <button id="ask-button" type="submit">Note Arrangement</button>
@@ -90,9 +90,18 @@
                 <option value="major">major</option>
                 <option value="minor">minor</option>
             </select>
+            <select class="variable-dropdown" id="variable-dropdown7">
+                <option value="classical">classical</option>
+                <option value="jazz">jazz</option>
+                <option value="rock and pop">rock and pop</option>
+                <option value="electronic and experimental">electronic and experimental</option>
+                <option value="blues">blues</option>
+            </select>
             <div class="dynamic-dropdown-container" id="dynamic-dropdown-container2">
             </div>
             <button id="advanced-button" type="submit">Key Modulation</button>
+            <input type="text" id="altered-input" placeholder="Target Chord">
+            <button id="altered-button" type="submit">Altered chord</button>
             <div id="text-result-3" style="margin-top: 30px;"></div>
         </form>
     </div>
