@@ -34,7 +34,7 @@ body, html {
     width: 550px; /* Adjust width as needed */
     margin: 0 auto; /* Center the form horizontally */
     padding: 10px; /* Add padding around the form */
-    max-height: 900px; /* Set a maximum height for the form */
+    max-height: 950px; /* Set a maximum height for the form */
     overflow-y: auto; /* Add vertical scrolling if content exceeds max-height */
   }
   
