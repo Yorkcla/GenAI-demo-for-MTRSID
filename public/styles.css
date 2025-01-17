@@ -48,7 +48,7 @@ body, html {
 }
 
 /* Styling for dynamically created dropdowns container */
-#dynamic-dropdown-container {
+.dynamic-dropdown-container {
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Stack dropdowns vertically */
   gap: 10px; /* Space between each dropdown */
@@ -56,7 +56,7 @@ body, html {
 }
 
 /* Styling for each dynamic dropdown */
-#dynamic-dropdown-container select {
+.dynamic-dropdown-container select {
   width: 100%; /* Full width of the container */
   padding: 2px; /* Match padding with the button */
   font-size: 12px; /* Match font size with the button */

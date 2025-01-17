@@ -182,6 +182,86 @@ document.getElementById('task-button').addEventListener('click', async (event) =
         // Display the notes in the output field
         document.getElementById('notes-output').value = chordNotes.join(' ');
     });
-});
 
 ////// section two end
+
+////// section three start
+    document.getElementById('dropdown-form3').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const dropdownValue4 = document.getElementById('variable-dropdown4').value;
+        const dropdownValue5 = document.getElementById('variable-dropdown5').value;
+        const dropdownValue6 = document.getElementById('variable-dropdown6').value;
+        let selectedValues = [];
+
+        // Collect selected values from dynamically generated dropdowns
+        for (let i = 0; i < dropdownValue4; i++) {
+            const dropdown = document.getElementById(`dynamic-dropdown-${i+1}`);
+            if (dropdown) {
+                const selectedValue = dropdown.options[dropdown.selectedIndex].value;
+                selectedValues.push(selectedValue);
+            }
+        }
+
+        // Create a comma-separated string of selected values
+        const selectedValuesString = selectedValues.join(', ');
+
+        // Construct the prompt with the selected values
+        const prompt = `Provide 5 key modulation options starting form ${dropdownValue5} ${dropdownValue6} key for ${dropdownValue4} sections, following the tonal functions in the order specified by: ${selectedValuesString}. Please simply suggest the options.`;
+
+        try {
+            const response = await fetch('http://localhost:3001/generate-text', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            console.log('Dropdown-based text generation response:', data);
+
+            if (data.message) {
+                appendMessage('user', prompt, 'text-result-3');
+                appendMessage('chatbot', data.message, 'text-result-3');
+            } else {
+                throw new Error('Unexpected response structure: missing "message"');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            appendMessage('chatbot', 'Error: ' + error.message, 'text-result-3');
+        }
+    });
+
+    // Handle dynamic dropdown creation
+    document.getElementById('variable-dropdown4').addEventListener('change', (event) => {
+        const dropdownValue4 = event.target.value;  // Get the selected value from the dropdown
+        const container = document.getElementById('dynamic-dropdown-container2');  // Reference the container for the new dropdowns
+
+        // Clear any existing dropdowns in the container
+        container.innerHTML = '';
+
+        // Create the number of dropdowns based on the dropdownValue4
+        for (let i = 0; i < dropdownValue4; i++) {
+            const newDropdown = document.createElement('select');
+            newDropdown.id = `dynamic-dropdown-${i+1}`;  // Unique ID for each dropdown
+
+            // Populate each dropdown with options
+            newDropdown.innerHTML = `
+                <option value="tonic">Start</option>
+                <option value="subdominant">Rising</option>
+                <option value="dominant">Peak</option>
+                <option value="tonic">End</option>
+                <option value="relative or parallel">Mood Shift</option>
+                <option value="prolongation">Continue</option>
+            `;
+
+            // Append the new dropdown to the container
+            container.appendChild(newDropdown);
+        }
+    });
+});
