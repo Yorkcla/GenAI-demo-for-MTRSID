@@ -69,7 +69,7 @@ The interface consists of three main sections:
     Choose the number of phases, tonality, and musical genre for key modulation.
     Input a chord for altered chord generation.
 
-Further details will be available in the forthcoming publication.
+Further details will be available in the publication.
 
 ## License
 
