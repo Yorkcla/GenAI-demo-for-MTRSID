@@ -1,6 +1,6 @@
 # GenAI-demo-for-MTRSID
 
-This is a GenAI-powered demonstration of a design framework for musical tension and release (tonal cognition) in sonic interaction design (MTRSID). It will be presented at the CHI Conference on Human Factors in Computing Systems, with a publication link forthcoming.
+This is a GenAI-powered demonstration of a design framework for musical tension and release (tonal cognition) in sonic interaction design (MTRSID). This work was presented at the ACM CHI Conference on Human Factors in Computing Systems (CHI 2025). The publication is available on the [ACM Digital Library](https://dl.acm.org/doi/10.1145/3706599.3720089).
 
 ## Installation
 
